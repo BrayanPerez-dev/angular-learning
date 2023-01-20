@@ -1,0 +1,46 @@
+<!-- <p>{{title}}</p>
+
+<p *ngIf="name">El nombre es:{{name}}</p>
+<input type="text" [(ngModel)]="name"> -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 my-3">
+            <app-form-new-item 
+            
+            [selection]="selection" [label]="'City'" [className]="'btn-info'" 
+            (onUpdateItemEvent)="onUpdateCity($event)"
+            (newItem)="addNewCity($event)"></app-form-new-item>
+        </div>
+        <div class="col-md-5 my-3">
+            <input type="text" class="form-control" [(ngModel)]="criteria" placeholder="search">
+        </div>
+        <hr>
+        <div class="col-md-8">
+                <ng-container *ngIf="cities.length > 1;else templateEmpty">
+                    <app-cities *ngFor="let city of (cities | filter:criteria)" [city]="city" [selection]="selection" (onCitySelectedEvent)="onCitySelected($event)" (onCityDeleteEvent)="onCityDelete($event)"></app-cities>
+                </ng-container>
+                <ng-template #templateEmpty>
+                We don´t have cities
+                </ng-template>
+        </div>
+        <hr>
+        <app-card>
+            <div card-header>Soy Header</div>
+            <div card-body>Soy Body</div>
+        </app-card>
+        <app-card>
+            <div card-header>Soy sup Header</div>
+            <div card-body>Soy sup Body</div>
+        </app-card>
+        <app-card></app-card>
+
+        <div class="col-md-4">
+            <ng-container *ngIf="selection?.name">
+                <p *ngIf="selection">your selection: {{selection?.name}}</p>
+                <app-button  (click)="onClear()" [color]="'blue'" [label]="'Clear your selection'"  ></app-button>
+            </ng-container>
+        </div>
+    </div>
+</div>
+<hr>
+
